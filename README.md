@@ -1,5 +1,4 @@
-# desafio
-Desafio Backend
+# Desafio Backend
 Agregação Curricular
 
 ## Instruções:
