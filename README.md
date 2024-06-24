@@ -9,4 +9,4 @@ Fazer o checkout do projeto e na raiz, executar o comando abaixo:
 A partir de agora você poderá acessar os serviços pelos endpoints presentes no Swagger.
 
 ### Link de acesso ao Swagger:
-http://localhost:8080/swagger-ui/index.html
+http://localhost:8080/api/swagger-ui/index.html

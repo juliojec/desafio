@@ -29,6 +29,8 @@ public class VotoService {
 
     private final PautaRepository pautaRepository;
 
+    private final SessaoService sessaoService;
+
     private final CpfValidationClient cpfValidationClient;
 
     @Value("${validators.cpf.api.token}")
@@ -40,6 +42,9 @@ public class VotoService {
 
         Pauta pauta = pautaRepository.findById(pautaId)
                 .orElseThrow(() -> new VotoException("Pauta não encontrada"));
+
+        if (!sessaoService.isSessaoAberta(pauta))
+            throw new VotoException("Não existe sessão aberta para esta pauta.");
 
         boolean cpfValido = validarCpfParaVotacao(cpf);
         if (!cpfValido)

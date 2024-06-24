@@ -2,6 +2,7 @@ package com.curriculo.desafio.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import com.curriculo.desafio.config.exceptions.PautaException;
 import com.curriculo.desafio.entitys.Pauta;
@@ -36,5 +37,11 @@ public class SessaoService {
 
     public List<Sessao> listarSessoes(Long pautaId) {
         return sessaoRepository.findByPautaId(pautaId);
+    }
+
+    public boolean isSessaoAberta(Pauta pauta) {
+        LocalDateTime now = LocalDateTime.now();
+        return sessaoRepository.findByPautaAndFimAfter(pauta, now).stream()
+                .anyMatch(sessao -> sessao.getFim().isAfter(now));
     }
 }

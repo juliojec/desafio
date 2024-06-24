@@ -35,6 +35,9 @@ public class VotoServiceTest {
     private PautaRepository pautaRepository;
 
     @Mock
+    private SessaoService sessaoService;
+
+    @Mock
     private CpfValidationClient cpfValidationClient;
 
     @InjectMocks
@@ -48,6 +51,7 @@ public class VotoServiceTest {
 
         Pauta pauta = Pauta.builder().id(pautaId).build();
         Voto novoVoto = Voto.builder().cpf(cpf).voto(voto).pauta(pauta).build();
+        when(sessaoService.isSessaoAberta(pauta)).thenReturn(true);
         when(pautaRepository.findById(pautaId)).thenReturn(Optional.of(pauta));
         when(votoRepository.findByPautaIdAndCpf(pautaId, cpf)).thenReturn(Optional.empty());
         when(votoRepository.save(any(Voto.class))).thenReturn(novoVoto);
